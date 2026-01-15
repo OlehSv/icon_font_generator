@@ -157,8 +157,7 @@ class PostScriptVersion20 extends PostScriptData {
 
     final numberOfGlyphs = glyphNameIndex.length;
 
-    final glyphNames =
-        glyphNameList.map(PascalString.fromString).toList();
+    final glyphNames = glyphNameList.map(PascalString.fromString).toList();
 
     return PostScriptVersion20(
       numberOfGlyphs,
@@ -217,8 +216,8 @@ class PostScriptVersion20 extends PostScriptData {
 }
 
 class PostScriptTable extends FontTable {
-  PostScriptTable(TableRecordEntry? entry, this.header, this.data)
-      : super.fromTableRecordEntry(entry);
+  PostScriptTable(super.entry, this.header, this.data)
+      : super.fromTableRecordEntry();
 
   factory PostScriptTable.fromByteData(
       ByteData byteData, TableRecordEntry entry) {

@@ -1,5 +1,3 @@
-library icon_font_generator.otf.cff;
-
 import 'dart:typed_data';
 
 import '../../common/calculatable_offsets.dart';
@@ -31,8 +29,7 @@ const _kMajorVersion1 = 0x0001;
 const _kMajorVersion2 = 0x0002;
 
 abstract class CFFTable extends FontTable {
-  CFFTable.fromTableRecordEntry(TableRecordEntry? entry)
-      : super.fromTableRecordEntry(entry);
+  CFFTable.fromTableRecordEntry(super.entry) : super.fromTableRecordEntry();
 
   static CFFTable? fromByteData(ByteData byteData, TableRecordEntry entry) {
     final major = byteData.getUint8(entry.offset);

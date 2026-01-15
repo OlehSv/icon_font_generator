@@ -74,9 +74,9 @@ class GlyphSubstitutionTableHeader implements BinaryCodable {
 }
 
 class GlyphSubstitutionTable extends FontTable {
-  GlyphSubstitutionTable(TableRecordEntry? entry, this.header,
-      this.scriptListTable, this.featureListTable, this.lookupListTable)
-      : super.fromTableRecordEntry(entry);
+  GlyphSubstitutionTable(super.entry, this.header, this.scriptListTable,
+      this.featureListTable, this.lookupListTable)
+      : super.fromTableRecordEntry();
 
   factory GlyphSubstitutionTable.fromByteData(
     ByteData byteData,
