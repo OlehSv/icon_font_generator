@@ -1,5 +1,5 @@
 name: icon_font_generator
-version: 4.0.0
+version: 4.1.0
 description: >-
   Converts SVG icons to OTF font and generates Flutter-compatible class.
   Provides an API and a CLI tool.
