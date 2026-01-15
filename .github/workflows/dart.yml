@@ -13,10 +13,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: dart-lang/setup-dart@v1
+    - uses: subosito/flutter-action@v2
       with:
-        sdk: stable
+        channel: stable
     - name: Install dependencies
       run: dart pub get
+    - name: Install example dependencies
+      run: |
+        cd example/flutter_usage
+        flutter pub get
+    - name: Analyze project
+      run: dart analyze
     - name: Run tests
       run: dart test test/test_all.dart

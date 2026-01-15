@@ -140,7 +140,9 @@ class CharacterToGlyphTableHeader implements BinaryCodable {
 
   @override
   void encodeToBinary(ByteData byteData) {
-    byteData..setUint16(0, version)..setUint16(2, numTables);
+    byteData
+      ..setUint16(0, version)
+      ..setUint16(2, numTables);
 
     for (var i = 0; i < encodingRecords.length; i++) {
       final r = encodingRecords[i];
@@ -189,8 +191,7 @@ abstract class CmapData implements BinaryCodable {
 
 class CmapByteEncodingTable extends CmapData {
   CmapByteEncodingTable(
-      int format, this.length, this.language, this.glyphIdArray)
-      : super(format);
+      super.format, this.length, this.language, this.glyphIdArray);
 
   factory CmapByteEncodingTable.fromByteData(ByteData byteData, int offset) {
     return CmapByteEncodingTable(
@@ -228,7 +229,7 @@ class CmapByteEncodingTable extends CmapData {
 
 class CmapSegmentMappingToDeltaValuesTable extends CmapData {
   CmapSegmentMappingToDeltaValuesTable(
-      int format,
+      super.format,
       this.length,
       this.language,
       this.segCount,
@@ -240,8 +241,7 @@ class CmapSegmentMappingToDeltaValuesTable extends CmapData {
       this.startCode,
       this.idDelta,
       this.idRangeOffset,
-      this.glyphIdArray)
-      : super(format);
+      this.glyphIdArray);
 
   factory CmapSegmentMappingToDeltaValuesTable.fromByteData(
       ByteData byteData, int startOffset) {
@@ -387,13 +387,13 @@ class CmapSegmentMappingToDeltaValuesTable extends CmapData {
 
 class CmapSegmentedCoverageTable extends CmapData {
   CmapSegmentedCoverageTable(
-    int format,
+    super.format,
     this.reserved,
     this.length,
     this.language,
     this.numGroups,
     this.groups,
-  ) : super(format);
+  );
 
   factory CmapSegmentedCoverageTable.fromByteData(
       ByteData byteData, int offset) {
@@ -462,10 +462,10 @@ class CmapSegmentedCoverageTable extends CmapData {
 
 class CharacterToGlyphTable extends FontTable {
   CharacterToGlyphTable(
-    TableRecordEntry? entry,
+    super.entry,
     this.header,
     this.data,
-  ) : super.fromTableRecordEntry(entry);
+  ) : super.fromTableRecordEntry();
 
   factory CharacterToGlyphTable.fromByteData(
     ByteData byteData,
@@ -486,7 +486,7 @@ class CharacterToGlyphTable extends FontTable {
     final fullCharCodeList = fullGlyphList
         .map((e) => e.metadata.charCode)
         .toList()
-          ..removeAt(0); // removing .notdef
+      ..removeAt(0); // removing .notdef
     final charCodeList = fullCharCodeList.whereType<int>().toList();
 
     final segmentList = _generateSegments(charCodeList);

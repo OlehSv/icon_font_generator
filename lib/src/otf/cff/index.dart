@@ -136,37 +136,31 @@ class CFFIndexWithData<T> implements BinaryCodable, CalculatableOffsets {
   final bool isCFF1;
 
   static Object Function(ByteData) _getDecoderForType(Type type) {
-    switch (type) {
-      case Uint8List:
-        return (bd) => Uint8List.fromList(
-            bd.buffer.asUint8List(bd.offsetInBytes, bd.lengthInBytes));
-      case CFFDict:
-        return CFFDict.fromByteData;
-      default:
+    if (type == Uint8List) {
+      return (bd) => Uint8List.fromList(
+          bd.buffer.asUint8List(bd.offsetInBytes, bd.lengthInBytes));
+    } else if (type == CFFDict) {
+      return CFFDict.fromByteData;
     }
 
     throw UnsupportedError('No decoder for type $type');
   }
 
   void Function(ByteData, T) _getEncoder() {
-    switch (T) {
-      case Uint8List:
-        return (bd, list) => bd.setByteList(0, list as Uint8List);
-      case CFFDict:
-        return (bd, dict) => (dict as CFFDict).encodeToBinary(bd);
-      default:
+    if (T == Uint8List) {
+      return (bd, list) => bd.setByteList(0, list as Uint8List);
+    } else if (T == CFFDict) {
+      return (bd, dict) => (dict as CFFDict).encodeToBinary(bd);
     }
 
     throw UnsupportedError('No encoder for type $T');
   }
 
   int Function(T) _getByteLengthCallback() {
-    switch (T) {
-      case Uint8List:
-        return (list) => (list as Uint8List).lengthInBytes;
-      case CFFDict:
-        return (dict) => (dict as CFFDict).size;
-      default:
+    if (T == Uint8List) {
+      return (list) => (list as Uint8List).lengthInBytes;
+    } else if (T == CFFDict) {
+      return (dict) => (dict as CFFDict).size;
     }
 
     throw UnsupportedError('No length callback for type $T');

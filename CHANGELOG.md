@@ -1,3 +1,9 @@
+## 4.1.0
+* Migrate from `flutter_lints` to `lints` package.
+* Update SDK constraint to `>=3.0.0 <4.0.0`.
+* Fix lint warnings and analysis issues.
+* Add `dart analyze` to CI workflow.
+
 ## 4.0.0
 
 * Rewrite by fork [[fontify]](https://github.com/westracer/fontify)
