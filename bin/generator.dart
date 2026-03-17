@@ -71,7 +71,7 @@ void _run(CliArguments parsedArgs) {
       .listSync(recursive: isRecursive)
       .where((e) => p.extension(e.path).toLowerCase() == '.svg')
       .toList()..sort(
-        (a, b) => path
+        (a, b) => p
             .basenameWithoutExtension(a.path)
             .compareTo(path.basenameWithoutExtension(b.path)),
       );
