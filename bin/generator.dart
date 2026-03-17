@@ -73,7 +73,7 @@ void _run(CliArguments parsedArgs) {
       .toList()..sort(
         (a, b) => p
             .basenameWithoutExtension(a.path)
-            .compareTo(path.basenameWithoutExtension(b.path)),
+            .compareTo(p.basenameWithoutExtension(b.path)),
       );
 
   if (svgFileList.isEmpty) {
